@@ -2,8 +2,22 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+import os
+import matplotlib
+matplotlib.use("Agg")
+matplotlib.rcParams['font.family'] = 'sans-serif'
+matplotlib.rcParams['font.sans-serif'] = ['DejaVu Sans']
+
+# 获取当前脚本文件的绝对路径
+current_file = os.path.abspath(__file__)
+
+# 获取当前脚本所在的文件夹路径
+current_dir = os.path.dirname(current_file)
+
+print(current_dir)
 # 读取 Excel 文件
-df = pd.read_excel('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/ipran-1k.xlsx')
+# df = pd.read_excel('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/ipran-1k.xlsx')
+df = pd.read_excel(os.path.join(current_dir, 'ipran-1k.xlsx'))
 
 # 提取数据
 # Errors = df['Errors'][:8]#到fattree18
@@ -89,7 +103,8 @@ fig.set_size_inches(7,3)
 # plt.gca().spines['right'].set_visible(False)
 # plt.show()
 plt.tight_layout()
-plt.savefig('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/ipran-diff-err.pdf')
+# plt.savefig('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/ipran-diff-err.pdf')
+plt.savefig(os.path.join(current_dir, 'ipran-diff-err.pdf'), bbox_inches='tight', pad_inches=0.05)
 
 print("Done!")
 # # 最后关闭图表

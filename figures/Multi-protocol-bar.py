@@ -2,8 +2,23 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+import os
+import matplotlib
+matplotlib.use("Agg")
+matplotlib.rcParams['font.family'] = 'sans-serif'
+matplotlib.rcParams['font.sans-serif'] = ['DejaVu Sans']
+
+# 获取当前脚本文件的绝对路径
+current_file = os.path.abspath(__file__)
+
+# 获取当前脚本所在的文件夹路径
+current_dir = os.path.dirname(current_file)
+
+print(current_dir)
+
 # 读取 Excel 文件
-df = pd.read_excel('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/MultiProtocol.xlsx')
+# df = pd.read_excel('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/MultiProtocol.xlsx')
+df = pd.read_excel(os.path.join(current_dir, 'MultiProtocol.xlsx'))
 
 # 提取数据
 topo = df['topo']
@@ -31,21 +46,21 @@ hatch_nei = "//"
 
 
 fig, ax = plt.subplots()
-bar1_bottom = ax.bar(np.arange(len(topo)), redis_first, width=bar_width, color = color_redis_f,label="Redistribution (Fir. Simulation)")
-bar2_bottom = ax.bar(np.arange(len(topo)) + bar_width, prop_first, width=bar_width, color = color_prop_f,label="Propagation (Fir. Simulation)")
-bar3_bottom = ax.bar(np.arange(len(topo)) + bar_width * 2, nei_first, width=bar_width, color = color_nei_f,label="Neighboring (Fir. Simulation)")
+bar1_bottom = ax.bar(np.arange(len(topo)), redis_first, width=bar_width, color = color_redis_f,label="Redistribution (Fir. Sim.)")
+bar2_bottom = ax.bar(np.arange(len(topo)) + bar_width, prop_first, width=bar_width, color = color_prop_f,label="Propagation (Fir. Sim.)")
+bar3_bottom = ax.bar(np.arange(len(topo)) + bar_width * 2, nei_first, width=bar_width, color = color_nei_f,label="Neighboring (Fir. Sim.)")
 
-bar1 = ax.bar(np.arange(len(topo)), redis_time, width=bar_width, bottom=redis_first, color=color_redis, hatch=hatch_redis, label='Redistribution (Sec. Simulation)')
+bar1 = ax.bar(np.arange(len(topo)), redis_time, width=bar_width, bottom=redis_first, color=color_redis, hatch=hatch_redis, label='Redistribution (Sec. Sim.)')
 # bar2_bottom = ax.bar(np.arange(len(topo)) + bar_width, scalpel_time1, width=bar_width, color=color_scalpel1,  label='First Simulation Time (R)')
-bar2 = ax.bar(np.arange(len(topo)) + bar_width, propagation_time, width=bar_width, bottom = prop_first, color=color_prop, hatch=hatch_prop, label='Propagation (Sec. Simulation)')
-bar3 = ax.bar(np.arange(len(topo)) + bar_width * 2, neighbor_time, width=bar_width, bottom = nei_first, color=color_nei, hatch=hatch_nei, label='Neighboring (Sec. Simulation)')
+bar2 = ax.bar(np.arange(len(topo)) + bar_width, propagation_time, width=bar_width, bottom = prop_first, color=color_prop, hatch=hatch_prop, label='Propagation (Sec. Sim.)')
+bar3 = ax.bar(np.arange(len(topo)) + bar_width * 2, neighbor_time, width=bar_width, bottom = nei_first, color=color_nei, hatch=hatch_nei, label='Neighboring (Sec. Sim.)')
 
 
 
 
 # 添加标签和图例
 # ax.set_xlabel('Topo',fontsize=15,weight='bold')
-ax.set_ylabel('Time (s)',fontsize=15,weight='bold')
+ax.set_ylabel('Time (s)',fontsize=19,weight='bold')
 #ax.set_title('Bar Chart with Two Parts')
 # ax.set_yticks(ticks)
 ax.set_yticklabels(ax.get_yticklabels(),fontsize=14,weight='bold')
@@ -65,7 +80,9 @@ fig.set_size_inches(7,4)
 # plt.gca().spines['top'].set_visible(False)
 # plt.gca().spines['right'].set_visible(False)
 plt.tight_layout()
-plt.savefig('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/Multi-protocol-Bar.pdf')
+# plt.savefig('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/Multi-protocol-Bar.pdf')
+
+plt.savefig(os.path.join(current_dir, 'Multi-protocol-Bar.pdf'), bbox_inches='tight', pad_inches=0.05)
 
 # 最后关闭图表
 # plt.close()
