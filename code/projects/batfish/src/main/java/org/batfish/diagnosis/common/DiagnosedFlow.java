@@ -1,9 +1,12 @@
 package org.batfish.diagnosis.common;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.io.File;
+import java.util.Collections;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -111,11 +114,27 @@ public class DiagnosedFlow {
     public static List<DiagnosedFlow> parse(String filePath) {
       File file = new File(filePath);
       Gson gson = new Gson();
-//      DiagnosedFlow flow;
-//      flow = gson.fromJson(InputData.getStr(file), Builder.class).build();
-//      修改：一次读入多条流
-      Type listType = new TypeToken<List<Builder>>(){}.getType();
-      List<Builder> builderList = gson.fromJson(InputData.getStr(file), listType);
+      // DiagnosedFlow flow;
+      // flow = gson.fromJson(InputData.getStr(file), Builder.class).build();
+      // 修改：一次读入多条流
+      // Type listType = new TypeToken<List<Builder>>(){}.getType();
+      // List<Builder> builderList = gson.fromJson(InputData.getStr(file), listType);
+      String json = InputData.getStr(file);
+      JsonElement root = JsonParser.parseString(json);
+      Type listType = new TypeToken<List<Builder>>() {}.getType();
+      List<Builder> builderList;
+      if (root.isJsonArray()) {
+        builderList = gson.fromJson(root, listType);
+      } else if (root.isJsonObject()) {
+        // Backward-compatible: allow a single object (non-array) in requirements.json
+        System.err.println(
+            "[WARN] requirements.json is a single JSON object; please wrap it in an array: [{...}]");
+        Builder single = gson.fromJson(root, Builder.class);
+        builderList = single == null ? Collections.emptyList() : Collections.singletonList(single);
+      } else {
+        throw new IllegalArgumentException(
+            "Invalid requirements.json: expected a JSON array or object at top-level");
+      }
       List<DiagnosedFlow> flowList = builderList.stream()
                                                 .map(Builder::build)
                                                 .collect(Collectors.toList());
