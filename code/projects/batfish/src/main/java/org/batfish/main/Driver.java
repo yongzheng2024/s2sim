@@ -365,11 +365,15 @@ public class Driver {
                         GlobalTracer.get().scopeManager().activate(outputAnswerSpan)) {
                       assert answerScope != null; // avoid unused warning
                       if (settings.getTaskId() != null) {
-                         boolean f = false;
-                         if (f) {
+                        /*
+                         * When running as a worker, the coordinator may later request work-json for the task ID.
+                         * Always materialize the answer into work-json when a task ID is present.
+                         */
+                        // boolean f = false;
+                        // if (f) {
                         batfish.outputAnswerWithLog(answer);
                         batfish.outputAnswerMetadata(answer);
-                         }
+                        // }
                       }
                     } catch (IOException e) {
                       String stackTrace = Throwables.getStackTraceAsString(e);
