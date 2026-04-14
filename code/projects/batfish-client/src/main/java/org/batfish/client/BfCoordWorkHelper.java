@@ -448,7 +448,12 @@ public class BfCoordWorkHelper {
     WebTarget webTarget = getTargetV2(Arrays.asList(urlTail.split("/", -1)));
     Invocation.Builder builder =
         webTarget
-            .request(MediaType.APPLICATION_JSON)
+            /*
+             * Some endpoints (e.g., workjson/{workId}) produce text/plain.
+             * Use a permissive Accept header for debugging endpoints.
+             */
+            // .request(MediaType.APPLICATION_JSON)
+            .request(MediaType.WILDCARD)
             .header(CoordConstsV2.HTTP_HEADER_BATFISH_APIKEY, _settings.getApiKey())
             .header(CoordConstsV2.HTTP_HEADER_BATFISH_VERSION, BatfishVersion.getVersionStatic());
     try (Response response =
