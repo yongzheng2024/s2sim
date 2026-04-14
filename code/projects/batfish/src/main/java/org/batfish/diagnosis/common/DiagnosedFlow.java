@@ -1,8 +1,10 @@
 package org.batfish.diagnosis.common;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.io.File;
@@ -27,6 +29,27 @@ import org.batfish.diagnosis.util.KeyWord;
  * ifMpls 5) mplsProtocol 6) mplsArea ... EVPN, SRv6, ....
  */
 public class DiagnosedFlow {
+
+    private static final String FIELD_SRC_NODE = "srcNode";
+
+    private static void normalizeSrcNodeField(com.google.gson.JsonObject obj) {
+      if (!obj.has(FIELD_SRC_NODE) || obj.get(FIELD_SRC_NODE) == null) {
+        return;
+      }
+      JsonElement src = obj.get(FIELD_SRC_NODE);
+      if (src.isJsonPrimitive() && src.getAsJsonPrimitive().isString()) {
+        String value = src.getAsString();
+        JsonArray arr = new JsonArray();
+        arr.add(new JsonPrimitive(value));
+        obj.add(FIELD_SRC_NODE, arr);
+        System.err.println(
+            "[WARN] requirements.json field 'srcNode' should be an array; auto-converted string to array");
+      }
+    }
+
+    private static void normalizeRequirementObject(com.google.gson.JsonObject obj) {
+      normalizeSrcNodeField(obj);
+    }
 
     Set<String> srcNode = new HashSet<>();
     String dstNode;
@@ -124,11 +147,19 @@ public class DiagnosedFlow {
       Type listType = new TypeToken<List<Builder>>() {}.getType();
       List<Builder> builderList;
       if (root.isJsonArray()) {
+        // Normalize each element for backward compatibility (e.g., srcNode: "r1")
+        root.getAsJsonArray().forEach(
+            el -> {
+              if (el != null && el.isJsonObject()) {
+                normalizeRequirementObject(el.getAsJsonObject());
+              }
+            });
         builderList = gson.fromJson(root, listType);
       } else if (root.isJsonObject()) {
         // Backward-compatible: allow a single object (non-array) in requirements.json
         System.err.println(
             "[WARN] requirements.json is a single JSON object; please wrap it in an array: [{...}]");
+        normalizeRequirementObject(root.getAsJsonObject());
         Builder single = gson.fromJson(root, Builder.class);
         builderList = single == null ? Collections.emptyList() : Collections.singletonList(single);
       } else {
