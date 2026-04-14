@@ -27,8 +27,10 @@ public class ShortestPath {
     }
 
     void delEdge(int v, int w) {
-        adj.get(v).remove(new Integer(w));
-        adj.get(w).remove(new Integer(v));
+        // adj.get(v).remove(new Integer(w));
+        // adj.get(w).remove(new Integer(v));
+        adj.get(v).remove(Integer.valueOf(w));
+        adj.get(w).remove(Integer.valueOf(v));
     }
 
     // 输出最短路径
