@@ -2268,7 +2268,7 @@ public class Batfish extends PluginConsumer implements IBatfish {
          // TODO: 需要传入对应的violations
          d.localize(ViolationsMap.violationsMap.get(d.getFlow().getCfgDstPrefixString()), true);
          System.out.println("*******************Repair********************");
-         // d.repairAll(false, true, "");
+         d.repairAll(false, true, "");
        }
 
       System.out.println("*******************End********************");

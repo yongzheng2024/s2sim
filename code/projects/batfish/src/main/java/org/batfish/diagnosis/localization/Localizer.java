@@ -21,21 +21,29 @@ public abstract class Localizer {
    }
 
    public void addErrorLine(Integer lineNum, String line) {
-       _errorLines.add(new ConfigurationLine(lineNum, line));
+        ConfigurationLine cfgline = new ConfigurationLine(lineNum, line);
+        if (!_errorLines.contains(cfgline)) {
+            _errorLines.add(cfgline);
+        } 
    }
 
    public void addErrorLines(Map<Integer, String> lines) {
        lines.forEach((lineNum, line) -> {
-           _errorLines.add(new ConfigurationLine(lineNum, line));
+           addErrorLine(lineNum, line);
        });
    }
 
    public void addErrorLines(List<ConfigurationLine> lines) {
-       _errorLines.addAll(lines);
+       lines.forEach(line -> {
+           addErrorLine(line);
+       });
    }
 
    public void addErrorLine(ConfigurationLine line) {
-       _errorLines.add(line);
+    if (!_errorLines.contains(line)){
+        _errorLines.add(line);
+    }
+       
    }
 
    /*

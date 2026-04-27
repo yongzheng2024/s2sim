@@ -6,8 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.batfish.datamodel.Bgpv4Route;
 
 /*
  * Each BGP Condition is for a router (for single prefix)
@@ -79,6 +82,19 @@ public class BgpCondition {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isDesiredBestRoute(Bgpv4Route transformedIncomingRoute) {
+        // Batfish仿真过程中route的下一跳不会记录子网掩码长度；但condition会记录，会导致不匹配
+            String nexthopIp = transformedIncomingRoute.getNextHopIp().toString() + "/32";
+            // Batfish的AsPath会用方括号标记，condition记录不会，会导致不匹配
+            String asPath = transformedIncomingRoute.getAsPath().toString();
+            String network = transformedIncomingRoute.getNetwork().toString();
+            List<String> selectNexthopIps = get_route().get_nextHopIps();
+            List<Long> selectAsPath = get_route().get_asPath();
+            String selectNetwork = get_route().get_networkString();
+            return selectNexthopIps.contains(nexthopIp) && selectAsPath.toString().equals(asPath)
+                && selectNetwork.equals(network);
     }
 
     public void setRedistribute(boolean value) {

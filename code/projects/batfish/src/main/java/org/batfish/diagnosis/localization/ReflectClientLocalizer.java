@@ -6,6 +6,7 @@ import org.batfish.datamodel.BgpProcess;
 import org.batfish.diagnosis.common.BgpPeerLog;
 import org.batfish.diagnosis.common.ConfigurationLine;
 import org.batfish.diagnosis.repair.Repairer;
+import org.batfish.diagnosis.repair.ReflectClientRepairer;
 
 public class ReflectClientLocalizer extends Localizer {
    private String _localDevName;
@@ -67,9 +68,9 @@ public class ReflectClientLocalizer extends Localizer {
 
    @Override
    public Repairer genRepairer() {
-       // TODO Auto-generated method stub
-    //    ReflectClientRepairer repairer = new ReflectClientRepairer(this);
-    //    repairer.genRepair();
+    //    @TODO Auto-generated method stub
+       ReflectClientRepairer repairer = new ReflectClientRepairer(this);
+       repairer.genRepair();
        return null;
    }
 

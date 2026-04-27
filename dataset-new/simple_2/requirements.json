@@ -1,0 +1,8 @@
+[{
+    "srcNode": ["b"],
+    "dstNode": "a",
+    "reqDstPrefixString": "90.0.0.0/24",
+    "failure":0,
+    "configRootPath": "/home/rulan/Scalpel-batfish/dataset-new/simple_2/configs"
+}]
+

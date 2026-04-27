@@ -1,0 +1,480 @@
+start time : 1777013497964
+end time : 1777013498739 : 
+First Simulation Time: 775 ms
+
+start time : 1777013524795
+end time : 1777013524807 : 
+Generate Forwarding Tree Time : 12 ms
+
+start time : 1777013524807
+end time : 1777013525092 : 
+Compute dataplane Time : 285 ms
+
+start time : 1777013525092
+end time : 1777013525102 : 
+Localize and Repair Time: 10 ms
+
+start time : 1777013582083
+end time : 1777013582085 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777013582085
+end time : 1777013582314 : 
+Compute dataplane Time : 229 ms
+
+start time : 1777013582314
+end time : 1777013582315 : 
+Localize and Repair Time: 1 ms
+
+start time : 1777013614007
+end time : 1777013614009 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777013614009
+end time : 1777013614526 : 
+Compute dataplane Time : 517 ms
+
+start time : 1777013614526
+end time : 1777013614527 : 
+Localize and Repair Time: 1 ms
+
+start time : 1777111157931
+end time : 1777111158692 : 
+First Simulation Time: 761 ms
+
+start time : 1777111169415
+end time : 1777111169426 : 
+Generate Forwarding Tree Time : 11 ms
+
+start time : 1777111288189
+end time : 1777111296043 : 
+First Simulation Time: 7854 ms
+
+start time : 1777111305437
+end time : 1777111308385 : 
+Generate Forwarding Tree Time : 2948 ms
+
+start time : 1777111452036
+end time : 1777111452039 : 
+Generate Forwarding Tree Time : 3 ms
+
+start time : 1777111498156
+end time : 1777111505527 : 
+First Simulation Time: 7371 ms
+
+start time : 1777111603525
+end time : 1777111603537 : 
+Generate Forwarding Tree Time : 12 ms
+
+start time : 1777111737616
+end time : 1777111738310 : 
+First Simulation Time: 694 ms
+
+start time : 1777111741346
+end time : 1777111741366 : 
+Generate Forwarding Tree Time : 20 ms
+
+start time : 1777111850220
+end time : 1777111850894 : 
+First Simulation Time: 674 ms
+
+start time : 1777111853802
+end time : 1777111853813 : 
+Generate Forwarding Tree Time : 11 ms
+
+start time : 1777111853813
+end time : 1777111854063 : 
+Compute dataplane Time : 250 ms
+
+start time : 1777111854063
+end time : 1777111854070 : 
+Localize and Repair Time: 7 ms
+
+start time : 1777111961372
+end time : 1777111962003 : 
+First Simulation Time: 631 ms
+
+start time : 1777111965338
+end time : 1777111965356 : 
+Generate Forwarding Tree Time : 18 ms
+
+start time : 1777111965357
+end time : 1777111965598 : 
+Compute dataplane Time : 241 ms
+
+start time : 1777111965598
+end time : 1777111965606 : 
+Localize and Repair Time: 8 ms
+
+start time : 1777112674090
+end time : 1777112681639 : 
+First Simulation Time: 7549 ms
+
+start time : 1777112693118
+end time : 1777112693131 : 
+Generate Forwarding Tree Time : 13 ms
+
+start time : 1777112693131
+end time : 1777112851847 : 
+Compute dataplane Time : 158716 ms
+
+start time : 1777112851847
+end time : 1777112863421 : 
+Localize and Repair Time: 11574 ms
+
+start time : 1777112906310
+end time : 1777112906312 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777112906312
+end time : 1777112912406 : 
+Compute dataplane Time : 6094 ms
+
+start time : 1777112912406
+end time : 1777112973208 : 
+Localize and Repair Time: 60802 ms
+
+start time : 1777163749514
+end time : 1777164488238 : 
+First Simulation Time: 738724 ms
+
+start time : 1777164492087
+end time : 1777164492098 : 
+Generate Forwarding Tree Time : 11 ms
+
+start time : 1777164492099
+end time : 1777164516154 : 
+Compute dataplane Time : 24055 ms
+
+start time : 1777164516154
+end time : 1777164543150 : 
+Localize and Repair Time: 26996 ms
+
+start time : 1777164547457
+end time : 1777164547459 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777164547459
+end time : 1777164690663 : 
+Compute dataplane Time : 143204 ms
+
+start time : 1777164690663
+end time : 1777164690665 : 
+Localize and Repair Time: 2 ms
+
+start time : 1777167344177
+end time : 1777167344888 : 
+First Simulation Time: 711 ms
+
+start time : 1777167359221
+end time : 1777167359236 : 
+Generate Forwarding Tree Time : 15 ms
+
+start time : 1777167359236
+end time : 1777167359517 : 
+Compute dataplane Time : 281 ms
+
+start time : 1777167641316
+end time : 1777167641951 : 
+First Simulation Time: 635 ms
+
+start time : 1777167649572
+end time : 1777167649583 : 
+Generate Forwarding Tree Time : 11 ms
+
+start time : 1777167649583
+end time : 1777167649824 : 
+Compute dataplane Time : 241 ms
+
+start time : 1777167649824
+end time : 1777167649833 : 
+Localize and Repair Time: 9 ms
+
+start time : 1777168061004
+end time : 1777168061699 : 
+First Simulation Time: 695 ms
+
+start time : 1777168064334
+end time : 1777168064346 : 
+Generate Forwarding Tree Time : 12 ms
+
+start time : 1777168064346
+end time : 1777168064600 : 
+Compute dataplane Time : 254 ms
+
+start time : 1777168064600
+end time : 1777168064611 : 
+Localize and Repair Time: 11 ms
+
+start time : 1777168133369
+end time : 1777168133372 : 
+Generate Forwarding Tree Time : 3 ms
+
+start time : 1777168133372
+end time : 1777168144398 : 
+Compute dataplane Time : 11026 ms
+
+start time : 1777168144399
+end time : 1777168275316 : 
+Localize and Repair Time: 130917 ms
+
+start time : 1777168277869
+end time : 1777168277871 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777168277871
+end time : 1777168282691 : 
+Compute dataplane Time : 4820 ms
+
+start time : 1777168282692
+end time : 1777168349576 : 
+Localize and Repair Time: 66884 ms
+
+start time : 1777168354425
+end time : 1777168354427 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777168354436
+end time : 1777168358530 : 
+Compute dataplane Time : 4094 ms
+
+start time : 1777168358531
+end time : 1777168596157 : 
+Localize and Repair Time: 237626 ms
+
+start time : 1777168605808
+end time : 1777168605809 : 
+Generate Forwarding Tree Time : 1 ms
+
+start time : 1777168605809
+end time : 1777168605975 : 
+Compute dataplane Time : 166 ms
+
+start time : 1777168605975
+end time : 1777168605977 : 
+Localize and Repair Time: 2 ms
+
+start time : 1777168608333
+end time : 1777168608334 : 
+Generate Forwarding Tree Time : 1 ms
+
+start time : 1777168608334
+end time : 1777168608492 : 
+Compute dataplane Time : 158 ms
+
+start time : 1777168608492
+end time : 1777168608495 : 
+Localize and Repair Time: 3 ms
+
+start time : 1777168796096
+end time : 1777168796097 : 
+Generate Forwarding Tree Time : 1 ms
+
+start time : 1777168796097
+end time : 1777168797235 : 
+Compute dataplane Time : 1138 ms
+
+start time : 1777168797235
+end time : 1777168797238 : 
+Localize and Repair Time: 3 ms
+
+start time : 1777168808035
+end time : 1777168808167 : 
+First Simulation Time: 132 ms
+
+start time : 1777168810079
+end time : 1777168810080 : 
+Generate Forwarding Tree Time : 1 ms
+
+start time : 1777168810080
+end time : 1777168821329 : 
+Compute dataplane Time : 11249 ms
+
+start time : 1777168821329
+end time : 1777168831095 : 
+Localize and Repair Time: 9766 ms
+
+start time : 1777169081381
+end time : 1777169082036 : 
+First Simulation Time: 655 ms
+
+start time : 1777169089754
+end time : 1777169089766 : 
+Generate Forwarding Tree Time : 12 ms
+
+start time : 1777169089766
+end time : 1777169090034 : 
+Compute dataplane Time : 268 ms
+
+start time : 1777169090034
+end time : 1777169090043 : 
+Localize and Repair Time: 9 ms
+
+start time : 1777169098215
+end time : 1777169098217 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777169098217
+end time : 1777169106080 : 
+Compute dataplane Time : 7863 ms
+
+start time : 1777169106081
+end time : 1777169229196 : 
+Localize and Repair Time: 123115 ms
+
+start time : 1777169380993
+end time : 1777169381678 : 
+First Simulation Time: 685 ms
+
+start time : 1777169384424
+end time : 1777169384436 : 
+Generate Forwarding Tree Time : 12 ms
+
+start time : 1777169384437
+end time : 1777169384700 : 
+Compute dataplane Time : 263 ms
+
+start time : 1777169408266
+end time : 1777169408268 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777169408268
+end time : 1777169412103 : 
+Compute dataplane Time : 3835 ms
+
+start time : 1777170772382
+end time : 1777170773093 : 
+First Simulation Time: 711 ms
+
+start time : 1777170777189
+end time : 1777170777205 : 
+Generate Forwarding Tree Time : 16 ms
+
+start time : 1777170777205
+end time : 1777170777401 : 
+Compute dataplane Time : 196 ms
+
+start time : 1777170777401
+end time : 1777170777412 : 
+Localize and Repair Time: 11 ms
+
+start time : 1777173462718
+end time : 1777173463369 : 
+First Simulation Time: 651 ms
+
+start time : 1777173467006
+end time : 1777173467017 : 
+Generate Forwarding Tree Time : 11 ms
+
+start time : 1777173467017
+end time : 1777173467210 : 
+Compute dataplane Time : 193 ms
+
+start time : 1777173467210
+end time : 1777173467220 : 
+Localize and Repair Time: 10 ms
+
+start time : 1777173504637
+end time : 1777173504639 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777173504639
+end time : 1777173508745 : 
+Compute dataplane Time : 4106 ms
+
+start time : 1777173508745
+end time : 1777173537437 : 
+Localize and Repair Time: 28692 ms
+
+start time : 1777173801085
+end time : 1777173801861 : 
+First Simulation Time: 776 ms
+
+start time : 1777173804928
+end time : 1777173804939 : 
+Generate Forwarding Tree Time : 11 ms
+
+start time : 1777173804961
+end time : 1777173805170 : 
+Compute dataplane Time : 209 ms
+
+start time : 1777173833113
+end time : 1777173833116 : 
+Generate Forwarding Tree Time : 3 ms
+
+start time : 1777173833116
+end time : 1777173833347 : 
+Compute dataplane Time : 231 ms
+
+start time : 1777173836642
+end time : 1777173836644 : 
+Generate Forwarding Tree Time : 2 ms
+
+start time : 1777173836644
+end time : 1777173837034 : 
+Compute dataplane Time : 390 ms
+
+start time : 1777174276144
+end time : 1777174276983 : 
+First Simulation Time: 839 ms
+
+start time : 1777174279561
+end time : 1777174279573 : 
+Generate Forwarding Tree Time : 12 ms
+
+start time : 1777174279573
+end time : 1777174279756 : 
+Compute dataplane Time : 183 ms
+
+start time : 1777174279756
+end time : 1777174279766 : 
+Localize and Repair Time: 10 ms
+
+start time : 1777251911236
+end time : 1777251911781 : 
+First Simulation Time: 545 ms
+
+start time : 1777251914408
+end time : 1777251914417 : 
+Generate Forwarding Tree Time : 9 ms
+
+start time : 1777251914418
+end time : 1777251914597 : 
+Compute dataplane Time : 179 ms
+
+start time : 1777251914597
+end time : 1777251914607 : 
+Localize and Repair Time: 10 ms
+
+start time : 1777251955550
+end time : 1777251955551 : 
+Generate Forwarding Tree Time : 1 ms
+
+start time : 1777251955551
+end time : 1777252049349 : 
+Compute dataplane Time : 93798 ms
+
+start time : 1777252049350
+end time : 1777252049351 : 
+Localize and Repair Time: 1 ms
+
+start time : 1777252161528
+end time : 1777252162008 : 
+First Simulation Time: 480 ms
+
+start time : 1777252167561
+end time : 1777252167571 : 
+Generate Forwarding Tree Time : 10 ms
+
+start time : 1777252167571
+end time : 1777252177534 : 
+Compute dataplane Time : 9963 ms
+
+start time : 1777252177534
+end time : 1777252182590 : 
+Localize and Repair Time: 5056 ms
+
+start time : 1777252208256
+end time : 1777252324536 : 
+First Simulation Time: 116280 ms
+

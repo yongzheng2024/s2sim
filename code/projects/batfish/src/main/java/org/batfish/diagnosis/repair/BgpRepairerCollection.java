@@ -347,22 +347,20 @@ public class BgpRepairerCollection {
                 //     RouteForbiddenRepairer otherRepairerWithSamePolicyName = getRouteForbiddenRepairerWithSamePolicyName(
                 //             ((RouteForbiddenLocalizer) localizer).getPolicyName(), repairSet);
                 //     if (otherRepairerWithSamePolicyName != null) {
-                //         RouteForbiddenRepairer repairer = new RouteForbiddenRepairer(
-                //                 (RouteForbiddenLocalizer) localizer, otherRepairerWithSamePolicyName.getPolicyName());
+                //         RouteForbiddenRepairer repairer = new RouteForbiddenRepairer((RouteForbiddenLocalizer) localizer);
                 //         repairer.genRepair();
                 //         repairSet.add(repairer);
                 //         continue;
-                //         // if
-                //         // (!otherRepairerWithSamePolicyName.getBgpRoute().getIpPrefixString().equals(((RouteForbiddenLocalizer)
-                //         // localizer).getBgpRoute().getIpPrefixString())) {
-                //         // // policy相同但需要修复的前缀不同，引用现有的防止route-policy node重复
-                //         // RouteForbiddenRepairer repairer = new RouteForbiddenRepairer(
-                //         // (RouteForbiddenLocalizer) localizer,
-                //         // otherRepairerWithSamePolicyName.getRoutePolicy());
-                //         // repairer.genRepair();
-                //         // repairSet.add(repairer);
-                //         // continue;
-                //         // }
+                //         if (!otherRepairerWithSamePolicyName.getBgpRoute().getIpPrefixString().equals(((RouteForbiddenLocalizer)
+                //         localizer).getBgpRoute().getIpPrefixString())) {
+                //             // policy相同但需要修复的前缀不同，引用现有的防止route-policy node重复
+                //             RouteForbiddenRepairer repairer = new RouteForbiddenRepairer(
+                //             (RouteForbiddenLocalizer) localizer,
+                //             otherRepairerWithSamePolicyName.getRoutePolicy());
+                //             repairer.genRepair();
+                //             repairSet.add(repairer);
+                //             continue;
+                //         }
                 //     }
                 // }
                 Repairer repairer = localizer.genRepairer();

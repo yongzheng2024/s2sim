@@ -49,6 +49,10 @@ public class RouteForbiddenLocalizer extends Localizer {
    private String _cfgPath;
 
 
+   public String getCfgPath() {
+    return _cfgPath;
+}
+
    public enum Direction {
        IN("in"),
        OUT("out"),
