@@ -1,10 +1,25 @@
+import os
+
 import pandas as pd
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import numpy as np
 
+matplotlib.rcParams['font.family'] = 'sans-serif'
+matplotlib.rcParams['font.sans-serif'] = ['DejaVu Sans']
+# 获取当前脚本文件的绝对路径
+current_file = os.path.abspath(__file__)
+
+# 获取当前脚本所在的文件夹路径
+current_dir = os.path.dirname(current_file)
+
+print(current_dir)
+
 # 读取 Excel 文件
-df = pd.read_excel('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/Real-topo.xlsx')
+df = pd.read_excel(os.path.join(current_dir, 'Real-topo.xlsx'))
+# df = pd.read_excel('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/Real-topo.xlsx')
 
 # 提取数据
 topo = df['topo']
@@ -16,7 +31,7 @@ fir_sim_k = df['First Sim（K）']
 fir_sim_w = df['First Sim（W）']
 
 # 设置柱状图宽度
-bar_width = 0.2
+bar_width = 0.25
 
 # 设置颜色和填充样式
 color_prop = '#BCF58D'
@@ -32,14 +47,14 @@ hatch_nei = "//"
 
 
 fig, ax = plt.subplots()
-bar1_bottom = ax.bar(np.arange(len(topo)), fir_sim, width=bar_width, color = color_redis_f,label="K = 0 (Fir. Simulation)")
-bar2_bottom = ax.bar(np.arange(len(topo)) + bar_width, fir_sim_k, width=bar_width, color = color_prop_f,label="K = 1 (Fir. Simulation)")
-bar3_bottom = ax.bar(np.arange(len(topo)) + bar_width * 2, fir_sim_w, width=bar_width, color = color_nei_f,label="Way-point (Fir. Simulation)")
+bar1_bottom = ax.bar(np.arange(len(topo)), fir_sim, width=bar_width, color = color_redis_f,label="RCH (K=0) (Fir. Sim.)")
+bar2_bottom = ax.bar(np.arange(len(topo)) + bar_width, fir_sim_k, width=bar_width, color = color_prop_f,label="RCH (K=1) (Fir. Sim.)")
+bar3_bottom = ax.bar(np.arange(len(topo)) + bar_width * 2, fir_sim_w, width=bar_width, color = color_nei_f,label="WPT (Fir. Sim.)")
 
-bar1 = ax.bar(np.arange(len(topo)), sec_sim, width=bar_width, bottom=fir_sim, color=color_redis, hatch=hatch_redis, label='K = 0 (Sec. Simulation)')
+bar1 = ax.bar(np.arange(len(topo)), sec_sim, width=bar_width, bottom=fir_sim, color=color_redis, hatch=hatch_redis, label='RCH (K=0) (Sec. Sim.)')
 # bar2_bottom = ax.bar(np.arange(len(topo)) + bar_width, scalpel_time1, width=bar_width, color=color_scalpel1,  label='First Simulation Time (R)')
-bar2 = ax.bar(np.arange(len(topo)) + bar_width, sec_sim_k, width=bar_width, bottom = fir_sim_k, color=color_prop, hatch=hatch_prop, label='K = 1 (Sec. Simulation)')
-bar3 = ax.bar(np.arange(len(topo)) + bar_width * 2, sec_sim_w, width=bar_width, bottom = fir_sim_w, color=color_nei, hatch=hatch_nei, label='Way-point (Sec. Simulation)')
+bar2 = ax.bar(np.arange(len(topo)) + bar_width, sec_sim_k, width=bar_width, bottom = fir_sim_k, color=color_prop, hatch=hatch_prop, label='RCH (K=1) (Sec. Sim.)')
+bar3 = ax.bar(np.arange(len(topo)) + bar_width * 2, sec_sim_w, width=bar_width, bottom = fir_sim_w, color=color_nei, hatch=hatch_nei, label='WPT (Sec. Sim.)')
 
 
 
@@ -64,11 +79,12 @@ ax.spines['bottom'].set_linewidth(bwith)
 ax.spines['left'].set_linewidth(bwith)
 ax.spines['top'].set_linewidth(bwith)
 ax.spines['right'].set_linewidth(bwith)
-fig.set_size_inches(9,4)
+fig.set_size_inches(7.5,4)
 # plt.gca().spines['top'].set_visible(False)
 # plt.gca().spines['right'].set_visible(False)
 plt.tight_layout()
-plt.savefig('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/Real-topo.pdf')
+# plt.savefig('/home/gaohan/Scalpel-batfish/eval_data_nsdi26/Real-topo.pdf')
+plt.savefig(os.path.join(current_dir, 'Real-topo.pdf'), bbox_inches='tight', pad_inches=0.05)
 
 # 最后关闭图表
 # plt.close()
