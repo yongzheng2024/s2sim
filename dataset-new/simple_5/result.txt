@@ -512,3 +512,22 @@ ErrorLineNumber: 14
 Command: route-map RMap_b_from_c permit 10
 ErrorLineNumber: 15
 Command: set local-preference 200
+*******************90.0.0.0/24********************
+
+Error Configuration: b.cfg
+ErrorLineNumber: 16
+Command: 
+ErrorLineNumber: 17
+Command: router bgp 11
+ErrorLineNumber: 18
+Command: neighbor 10.0.0.1 remote-as 10
+ErrorLineNumber: 19
+Command: neighbor 10.0.1.1 remote-as 12
+ErrorLineNumber: 20
+Command: neighbor 10.0.1.1 route-map RMap_b_from_c in
+ErrorLineNumber: 21
+Command: neighbor 10.0.2.1 remote-as 13
+ErrorLineNumber: 14
+Command: route-map RMap_b_from_c permit 10
+ErrorLineNumber: 15
+Command: set local-preference 200
