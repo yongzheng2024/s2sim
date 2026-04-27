@@ -1,0 +1,42 @@
+*******************128.0.1.0/24********************
+
+Error Configuration: sezana.cfg
+ErrorLineNumber: -1
+Command: network 128.0.1.0 mask 255.255.255.0
+
+Error Configuration: gornjattradgona.cfg
+ErrorLineNumber: -1
+Command: neighbor 10.0.0.55 remote-as 170
+ErrorLineNumber: -2
+Command: neighbor 10.0.0.55 description "To maribor"
+
+Error Configuration: ptuj.cfg
+ErrorLineNumber: 64
+Command: route-map RMap_Ptuj_to_Ormoz deny 10
+ErrorLineNumber: 65
+Command: match ip address prefix-list 1
+ErrorLineNumber: 90
+Command: neighbor 10.0.0.84 route-map RMap_Ptuj_to_Ormoz out
+ErrorLineNumber: 66
+Command: route-map RMap_Ptuj_to_Ormoz permit 100
+*******************128.0.1.0/24********************
+
+Error Configuration: sezana.cfg
+ErrorLineNumber: -1
+Command: network 128.0.1.0 mask 255.255.255.0
+
+Error Configuration: gornjattradgona.cfg
+ErrorLineNumber: -1
+Command: neighbor 10.0.0.55 remote-as 170
+ErrorLineNumber: -2
+Command: neighbor 10.0.0.55 description "To maribor"
+
+Error Configuration: ptuj.cfg
+ErrorLineNumber: 64
+Command: route-map RMap_Ptuj_to_Ormoz deny 10
+ErrorLineNumber: 65
+Command: match ip address prefix-list 1
+ErrorLineNumber: 90
+Command: neighbor 10.0.0.84 route-map RMap_Ptuj_to_Ormoz out
+ErrorLineNumber: 66
+Command: route-map RMap_Ptuj_to_Ormoz permit 100

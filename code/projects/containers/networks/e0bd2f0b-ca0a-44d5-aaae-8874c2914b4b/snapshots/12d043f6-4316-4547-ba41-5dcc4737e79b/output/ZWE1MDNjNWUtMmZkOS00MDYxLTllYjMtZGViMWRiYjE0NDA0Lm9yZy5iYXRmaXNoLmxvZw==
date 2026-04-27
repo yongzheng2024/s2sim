@@ -1,0 +1,13 @@
+Exception in container:e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, testrig:12d043f6-4316-4547-ba41-5dcc4737e79b; exception:java.lang.NullPointerException
+	at org.batfish.diagnosis.common.DiagnosedFlow$Builder.build(DiagnosedFlow.java:190)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+	at org.batfish.diagnosis.common.DiagnosedFlow.parse(DiagnosedFlow.java:121)
+	at org.batfish.main.Batfish.repair(Batfish.java:2205)
+	at org.batfish.main.Driver.lambda$0(Driver.java:315)
+	at java.lang.Thread.run(Thread.java:750)

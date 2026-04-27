@@ -1,0 +1,1 @@
+{"RMap_b_from_a":{"lines":{"10":{"name":"RMap_b_from_a","access":"DENY","lineno":10,"matches":{},"actions":[{"localPreference":{"class":"org.batfish.datamodel.routing_policy.expr.LiteralLong","value":200}}]}},"line_range":{"definitionLines":"14-15","numReferrers":0},"name":"RMap_b_from_a","community_lists":{},"as_path_lists":{},"prefix_lists":{}}}

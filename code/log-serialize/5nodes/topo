@@ -1,0 +1,12 @@
+a,Serial0|b,Serial0
+b,Serial0|a,Serial0
+b,Serial1|c,Serial0
+b,Serial2|d,Serial0
+c,Serial0|b,Serial1
+c,Serial1|d,Serial1
+c,Serial2|e,Serial0
+d,Serial0|b,Serial2
+d,Serial1|c,Serial1
+d,Serial2|e,Serial1
+e,Serial0|c,Serial2
+e,Serial1|d,Serial2

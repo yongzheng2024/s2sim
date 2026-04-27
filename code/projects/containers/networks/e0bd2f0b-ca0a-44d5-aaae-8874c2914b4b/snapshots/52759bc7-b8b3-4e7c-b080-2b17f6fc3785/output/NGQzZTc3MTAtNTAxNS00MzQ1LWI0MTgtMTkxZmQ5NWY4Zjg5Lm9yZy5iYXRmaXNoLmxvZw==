@@ -1,0 +1,12 @@
+Loading configurations for NetworkSnapshot{network=e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, snapshot=52759bc7-b8b3-4e7c-b080-2b17f6fc3785}
+Loading configurations for NetworkSnapshot{network=e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, snapshot=52759bc7-b8b3-4e7c-b080-2b17f6fc3785}
+Loading configurations for NetworkSnapshot{network=e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, snapshot=52759bc7-b8b3-4e7c-b080-2b17f6fc3785}
+Loading configurations for NetworkSnapshot{network=e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, snapshot=52759bc7-b8b3-4e7c-b080-2b17f6fc3785}
+Loading configurations for NetworkSnapshot{network=e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, snapshot=52759bc7-b8b3-4e7c-b080-2b17f6fc3785}
+Exception in container:e0bd2f0b-ca0a-44d5-aaae-8874c2914b4b, testrig:52759bc7-b8b3-4e7c-b080-2b17f6fc3785; exception:java.lang.NullPointerException
+	at org.batfish.dataplane.ibdp.IncrementalBdpEngine.computeDataPlane(IncrementalBdpEngine.java:459)
+	at org.batfish.dataplane.ibdp.IncrementalDataPlanePlugin.computeDataPlane(IncrementalDataPlanePlugin.java:48)
+	at org.batfish.main.Batfish.computeDataPlane(Batfish.java:787)
+	at org.batfish.main.Batfish.run(Batfish.java:2168)
+	at org.batfish.main.Driver.lambda$0(Driver.java:318)
+	at java.lang.Thread.run(Thread.java:750)
