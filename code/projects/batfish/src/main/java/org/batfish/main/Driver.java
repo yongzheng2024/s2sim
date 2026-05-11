@@ -365,11 +365,8 @@ public class Driver {
                         GlobalTracer.get().scopeManager().activate(outputAnswerSpan)) {
                       assert answerScope != null; // avoid unused warning
                       if (settings.getTaskId() != null) {
-                         boolean f = false;
-                         if (f) {
                         batfish.outputAnswerWithLog(answer);
                         batfish.outputAnswerMetadata(answer);
-                         }
                       }
                     } catch (IOException e) {
                       String stackTrace = Throwables.getStackTraceAsString(e);

@@ -403,8 +403,8 @@ public class BgpRepairerCollection {
                 repairer.getAddedLines().forEach(line-> {
                     addRepairLine(addLineMap, node, line.getLineNumber(), line.getLine());
                 });
-                repairer.getDeletedLines().forEach(line-> {
-                    addRepairLine(addLineMap, node, line.getLineNumber(), line.getLine());
+                repairer.getDeletedLines().forEach(line -> {
+                    addRepairLine(delLineMap, node, line.getLineNumber(), line.getLine());
                 });
             }
         }

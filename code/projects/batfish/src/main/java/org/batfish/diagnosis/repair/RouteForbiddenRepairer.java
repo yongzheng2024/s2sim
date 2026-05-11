@@ -47,10 +47,14 @@ public class RouteForbiddenRepairer extends Repairer {
 
        Configuration configuration = localizer.getConfiguration();
 
-       // STEP 0.1: 找到拦截的那条route-policy规则
-       String policyName = localizer.getPolicyName();
-       if (policyName!=null) {
-           RoutingPolicy routingPolicy = configuration.getRoutingPolicies().get(policyName);
+       // STEP 0.1: 找到拦截的那条route-policy规则（Batfish 模型名与配置文件 route-map 名可能不一致）
+       String batfishPolicyName = localizer.getPolicyName();
+       String configRouteMapName = localizer.getConfigRouteMapName();
+       if (configRouteMapName == null || configRouteMapName.isEmpty()) {
+           configRouteMapName = batfishPolicyName;
+       }
+       if (batfishPolicyName != null) {
+           RoutingPolicy routingPolicy = configuration.getRoutingPolicies().get(batfishPolicyName);
        } else {
             System.out.println("没有找到policyName");
            return;
@@ -61,10 +65,57 @@ public class RouteForbiddenRepairer extends Repairer {
        // STEP 1: 没有这样一条完全匹配的ip规则拦截，则在route-policy最前面新添规则【startLine是route-policy最前面】
        ConfigurationLine startLine = new ConfigurationLine(Integer.MAX_VALUE, "");
        for (ConfigurationLine line : localizer.getErrorLines()) {
-            if (line.getLineNumber() < startLine.getLineNumber() && !line.getLine().contains(KeyWord.BGP_NEIGHBOR)) {
-                startLine.setLineNumber(line.getLineNumber());
-                startLine.setLine(line.getLine());
+            String lineText = line.getLine();
+            if (lineText == null || lineText.trim().isEmpty()) {
+                // policyLinesFinder 会把 route-map 块里的空行放进 errorLines；空行 split 后最后一个 token 是 "" 会触发 parseInt 异常
+                continue;
             }
+            if (line.getLineNumber() < startLine.getLineNumber()
+                    && !lineText.contains(KeyWord.BGP_NEIGHBOR)) {
+                startLine.setLineNumber(line.getLineNumber());
+                startLine.setLine(lineText.trim());
+            }
+       }
+       // 若仅有 neighbor 行（或其它原因未选到 startLine），则按策略名找第一条 route-map 头行
+       if (startLine.getLineNumber() == Integer.MAX_VALUE || startLine.getLine().isEmpty()) {
+           String routeMapPrefix = KeyWord.ROUTE_POLICY + " " + configRouteMapName + " ";
+           for (ConfigurationLine line : localizer.getErrorLines()) {
+               String t = line.getLine();
+               if (t == null) {
+                   continue;
+               }
+               t = t.trim();
+               if (t.startsWith(routeMapPrefix)) {
+                   startLine.setLineNumber(line.getLineNumber());
+                   startLine.setLine(t);
+                   break;
+               }
+           }
+       }
+       // 仍找不到时：任取一条 route-map 头行（permit|deny + 序号），用于 Batfish 内部名与配置名不一致且 peer 解析失败时
+       if (startLine.getLineNumber() == Integer.MAX_VALUE || startLine.getLine().isEmpty()) {
+           for (ConfigurationLine line : localizer.getErrorLines()) {
+               String t = line.getLine();
+               if (t == null) {
+                   continue;
+               }
+               t = t.trim();
+               if (!t.startsWith(KeyWord.ROUTE_POLICY + " ")) {
+                   continue;
+               }
+               String[] parts = t.split("\\s+");
+               if (parts.length >= 4
+                       && (KeyWord.PERMIT.equals(parts[2]) || KeyWord.DENY.equals(parts[2]))
+                       && parts[3].matches("\\d+")) {
+                   startLine.setLineNumber(line.getLineNumber());
+                   startLine.setLine(t);
+                   break;
+               }
+           }
+       }
+       if (startLine.getLineNumber() == Integer.MAX_VALUE || startLine.getLine().isEmpty()) {
+           System.out.println("RouteForbiddenRepairer: 无法在错误行中定位 route-map，跳过生成修复");
+           return;
        }
        String prefixStr = "";
        String asPathStr = "";
@@ -83,10 +134,20 @@ public class RouteForbiddenRepairer extends Repairer {
        String newAsListSeq = "10";
        String newAsList = "ip as-path access-list " + newAsListSeq + " permit " + "^" + asPathStr + "$" + "\n" + "!";
        addAddedLine(insertLine, newAsList);
-       // 生成route-policy
-       String[] words = startLine.getLine().split(" ");
-       int seqNum = Integer.parseInt(words[words.length-1]);
-       String newRoutePolicy = "route-policy " + policyName + " permit " + (seqNum-1);
+       // 生成route-policy（Cisco route-map 行末为序号；避免连续空格或尾部空格导致空 token）
+       String[] words = startLine.getLine().trim().split("\\s+");
+       String seqToken = words[words.length - 1];
+       if (!seqToken.matches("\\d+")) {
+           System.out.println("RouteForbiddenRepairer: 无法从行解析 route-map 序号: " + startLine.getLine());
+           return;
+       }
+       int seqNum = Integer.parseInt(seqToken);
+       String repairMapName = configRouteMapName;
+       String[] hdrParts = startLine.getLine().trim().split("\\s+");
+       if (hdrParts.length >= 2 && KeyWord.ROUTE_POLICY.equals(hdrParts[0])) {
+           repairMapName = hdrParts[1];
+       }
+       String newRoutePolicy = "route-policy " + repairMapName + " permit " + (seqNum - 1);
        addAddedLine(insertLine, newRoutePolicy);
        addAddedLine(insertLine, "match as-path "+ newAsListSeq);
        addAddedLine(insertLine, "match ip-prefix " + newPrefixListName);

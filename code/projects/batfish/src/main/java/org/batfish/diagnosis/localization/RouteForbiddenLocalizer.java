@@ -39,6 +39,8 @@ public class RouteForbiddenLocalizer extends Localizer {
 
    // 路由策略policy的名称（如果没有这个policy，那么就是vpn交叉失败导致forbid的）
    String _policyName;
+   /** 配置文件中 route-map 后的名字；可能与 Batfish 的 {@link #_policyName} 不一致。 */
+   private String _configRouteMapName;
    AbstractRoute _route;
    BgpRouteLog _bgpRouteLog;
    Bgpv4Route _bgpv4Route;
@@ -81,6 +83,14 @@ public class RouteForbiddenLocalizer extends Localizer {
 
    public String getPolicyName() {
        return this._policyName;
+   }
+
+   /**
+    * 用于在原始 Cisco 等配置里匹配 {@code route-map ...} 行；优先从 neighbor 行解析，否则回退为
+    * {@link #getPolicyName()}。
+    */
+   public String getConfigRouteMapName() {
+       return _configRouteMapName;
    }
 
    public String getPeerNodeIp() {
@@ -141,16 +151,14 @@ public class RouteForbiddenLocalizer extends Localizer {
 
      Map<Integer, String> peerRpLines = ConfigTaint.peerTaint(_node, keyWords, _cfgPath);
      addErrorLines(peerRpLines);
-     //根据应用配置的命令查找真实的策略名
-     //    0       1       2        3         4
-     //neighbor PeerIP route-map RMap_G_to_A in/out
-     String policyName = null;
-     for(Integer i : peerRpLines.keySet()){
-       if(peerRpLines.get(i).contains(KeyWord.ROUTE_POLICY)){
-         policyName = peerRpLines.get(i).split(" ")[3];
-       }
+     // 从 neighbor 行解析配置里的 route-map 名（不能用固定 split 下标：多空格会错位）
+     String policyNameForFileLookup = extractRouteMapNameFromPeerLines(peerRpLines);
+     if (policyNameForFileLookup == null) {
+       policyNameForFileLookup = _policyName;
      }
-     Map<Integer, String> policyLines = ConfigTaint.policyLinesFinder(_node, policyName, _cfgPath);
+     _configRouteMapName = policyNameForFileLookup;
+     Map<Integer, String> policyLines =
+         ConfigTaint.policyLinesFinder(_node, policyNameForFileLookup, _cfgPath);
 //     // 这里的matchedRuleOrder是从1开始的
 //    int matchedRuleOrder = getTheMatchedRuleOrder();
 //
@@ -180,6 +188,22 @@ public class RouteForbiddenLocalizer extends Localizer {
 
      addErrorLines(policyLines);
      return getErrorLines();
+   }
+
+   private static String extractRouteMapNameFromPeerLines(Map<Integer, String> peerRpLines) {
+     for (Integer i : peerRpLines.keySet()) {
+       String pl = peerRpLines.get(i);
+       if (pl == null || !pl.contains(KeyWord.ROUTE_POLICY)) {
+         continue;
+       }
+       String[] parts = pl.trim().split("\\s+");
+       for (int j = 0; j < parts.length - 1; j++) {
+         if (KeyWord.ROUTE_POLICY.equals(parts[j])) {
+           return parts[j + 1];
+         }
+       }
+     }
+     return null;
    }
 
    private int getTheMatchedRuleOrder() {

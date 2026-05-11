@@ -238,11 +238,12 @@ public class ConfigTaint {
                         flag = false;
                     }
                     else if (flag) {// #输出route-map到#之间的内容
-
-                        route_policy_map.put(line, tempString);
-                        if (tempString.startsWith(KeyWord.POLICY_MATCH)) {
-                            // tempString = tempString.replaceAll(KeyWord.POLICY_MATCH,"ip");
-                            if_match_list.add(tempString);
+                        if (!tempString.isEmpty()) {
+                            route_policy_map.put(line, tempString);
+                            if (tempString.startsWith(KeyWord.POLICY_MATCH)) {
+                                // tempString = tempString.replaceAll(KeyWord.POLICY_MATCH,"ip");
+                                if_match_list.add(tempString);
+                            }
                         }
                     }
                     // else{

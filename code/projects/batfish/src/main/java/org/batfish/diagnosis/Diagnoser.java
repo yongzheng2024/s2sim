@@ -579,7 +579,9 @@ public class Diagnoser {
 
           bgpRepairerCollection.transLocalizerToRepaier(curLocalizers);
           bgpRepairerCollection.finish(ifPrint);
-
+          String changeFilePath =
+              InputData.concatFilePath(_flow.getNetworkRootPath(), "config-change.txt");
+          bgpRepairerCollection.printConfigChange(changeFilePath);
 
           // 写入对应文件夹中，生成新配置文件
           // if (ifWriteBack) {

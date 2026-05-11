@@ -1,9 +1,12 @@
 package org.batfish.diagnosis.common;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -111,15 +114,50 @@ public class DiagnosedFlow {
     public static List<DiagnosedFlow> parse(String filePath) {
       File file = new File(filePath);
       Gson gson = new Gson();
-//      DiagnosedFlow flow;
-//      flow = gson.fromJson(InputData.getStr(file), Builder.class).build();
-//      修改：一次读入多条流
-      Type listType = new TypeToken<List<Builder>>(){}.getType();
-      List<Builder> builderList = gson.fromJson(InputData.getStr(file), listType);
+      JsonElement root = JsonParser.parseString(InputData.getStr(file));
+      List<Builder> builderList = new ArrayList<>();
+      if (root.isJsonArray()) {
+        for (JsonElement element : root.getAsJsonArray()) {
+          builderList.add(gson.fromJson(normalizeFlowJson(element.getAsJsonObject()), Builder.class));
+        }
+      } else if (root.isJsonObject()) {
+        builderList.add(gson.fromJson(normalizeFlowJson(root.getAsJsonObject()), Builder.class));
+      } else {
+        throw new IllegalArgumentException("Invalid diagnosed flow JSON: " + filePath);
+      }
+      builderList.forEach(builder -> fillDefaultConfigRootPath(builder, file));
       List<DiagnosedFlow> flowList = builderList.stream()
                                                 .map(Builder::build)
                                                 .collect(Collectors.toList());
       return flowList;
+    }
+
+    private static JsonObject normalizeFlowJson(JsonObject flowJson) {
+      JsonObject normalized = flowJson.deepCopy();
+      JsonElement srcNode = normalized.get("srcNode");
+      if (srcNode != null && srcNode.isJsonPrimitive()) {
+        JsonArray srcNodes = new JsonArray();
+        srcNodes.add(srcNode);
+        normalized.add("srcNode", srcNodes);
+      }
+      return normalized;
+    }
+
+    private static void fillDefaultConfigRootPath(Builder builder, File requirementFile) {
+      if (builder == null) {
+        return;
+      }
+      if (builder.configRootPath != null && new File(builder.configRootPath).isDirectory()) {
+        return;
+      }
+      File snapshotRoot = requirementFile.getParentFile();
+      if (snapshotRoot == null) {
+        return;
+      }
+      File configsDir = new File(snapshotRoot, "configs");
+      if (configsDir.isDirectory()) {
+        builder.configRootPath = configsDir.getAbsolutePath();
+      }
     }
 
     public static final class Builder {

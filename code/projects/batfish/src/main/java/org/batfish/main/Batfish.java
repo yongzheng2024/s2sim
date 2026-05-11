@@ -2804,9 +2804,14 @@ public class Batfish extends PluginConsumer implements IBatfish {
 
   private void dumpRmapToFile(List<ParseVendorConfigurationResult> parseResults, String path) {
     // make sure the path is directory
-    File f = new File(path);
-    if (!f.exists() || !f.isDirectory()) {
-      f.mkdir();
+    File directory = new File(path);
+    if (!directory.exists() && !directory.mkdirs()) {
+      _logger.warnf("Could not create route-map output directory: %s\n", directory);
+      return;
+    }
+    if (!directory.isDirectory()) {
+      _logger.warnf("Route-map output path is not a directory: %s\n", directory);
+      return;
     }
 
     Map<String, RouteMapMap> rmaps = new HashMap<>();
@@ -2828,14 +2833,7 @@ public class Batfish extends PluginConsumer implements IBatfish {
 
     try {
 
-      File file = new File(path+"rmap");
-      // if file doesnt exists, then create it
-      if (!file.exists()) {
-        file.createNewFile();
-      }
-
-      // FileWriter fw = new FileWriter(file.getAbsoluteFile());
-      // BufferedWriter bw = new BufferedWriter(fw);
+      File file = new File(directory, "rmap");
       ObjectMapper mapper = new ObjectMapper();
       mapper.writeValue(file, rmaps);
       // transferBGPRmap();
