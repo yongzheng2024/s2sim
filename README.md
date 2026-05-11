@@ -18,7 +18,7 @@ cd S2Sim
 Build the project:
 
 ```bash
-cd code/project
+cd code/projects
 mvn package -Dmaven.test.skip=true
 ```
 
